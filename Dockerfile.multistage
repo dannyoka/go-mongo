@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
 
+# testing new line
 # Build the application from source
 
 FROM golang:1.21 AS build-stage
