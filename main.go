@@ -20,4 +20,5 @@ func main() {
 	repositoriesContext := repositories.InitRepositories(db)
 	services.InitServices(repositoriesContext)
 	fmt.Println("Hello World")
+	fmt.Println("Hello World again")
 }
