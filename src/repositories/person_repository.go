@@ -10,6 +10,8 @@ import (
 
 type IPersonRepository interface {
 	FindOneByName(name string) (data.Person, error)
+	FindAll() ([]data.Person, error)
+	Insert(person data.Person) error
 }
 
 type PersonRepository struct {
@@ -25,4 +27,29 @@ func (r *PersonRepository) FindOneByName(name string) (data.Person, error) {
 	var result data.Person
 	err := r.collection.FindOne(context.Background(), bson.M{"name": name}).Decode(&result)
 	return result, err
+}
+
+func (r *PersonRepository) FindAll() ([]data.Person, error) {
+	var results []data.Person
+	cursor, err := r.collection.Find(context.Background(), bson.M{})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(context.Background())
+	for cursor.Next(context.Background()) {
+		var result data.Person
+		if err := cursor.Decode(&result); err != nil {
+			return nil, err
+		}
+		results = append(results, result)
+	}
+	return results, nil
+}
+
+func (r *PersonRepository) Insert(person data.Person) error {
+	_, err := r.collection.InsertOne(
+		context.Background(),
+		bson.M{"name": person.Name, "value": person.Value},
+	)
+	return err
 }
