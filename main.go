@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/dannyoka/go-mongo/src/config"
 	"github.com/dannyoka/go-mongo/src/db"
 	"github.com/dannyoka/go-mongo/src/repositories"
@@ -17,4 +19,5 @@ func main() {
 	db := db.InitDB(config, "test")
 	repositoriesContext := repositories.InitRepositories(db)
 	services.InitServices(repositoriesContext)
+	fmt.Println("Hello World")
 }
