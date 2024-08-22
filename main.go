@@ -20,7 +20,7 @@ type Person struct {
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found")
+		log.Println("No .env file found, sucka!")
 	}
 	config := config.New()
 	mongoUri, err := config.Get("MONGO_URI")
