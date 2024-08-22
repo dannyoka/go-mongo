@@ -2,5 +2,5 @@ package data
 
 type Person struct {
 	Name  string
-	Value string
+	Value float64
 }

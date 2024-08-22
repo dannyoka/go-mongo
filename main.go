@@ -38,15 +38,12 @@ func main() {
 		}
 	}()
 	db := client.Database("test")
-	collection := db.Collection("test")
 	personRepository := repositories.NewPersonRepository(db)
 	personService := services.NewPersonService(personRepository)
-	person, err := personService.FindOneByName("pi")
+	persons, err := personService.FindAll()
 	if err != nil {
 		log.Fatalf("Error inserting document: %v", err)
 	}
-	fmt.Println(person.Name)
-	fmt.Println(person.Value)
-	fmt.Println(collection)
+	fmt.Println(persons)
 	fmt.Println("Hello World")
 }

@@ -11,10 +11,10 @@ func New() *Config {
 	return &Config{}
 }
 
-func (c *Config) Get(key string) (string, error) {
+func (c *Config) Get(key string) string {
 	value := os.Getenv(key)
 	if value == "" {
-		return "", fmt.Errorf("No value found for key %s", key)
+		panic(fmt.Sprintf("Error getting %s: %v", key, "value is empty"))
 	}
-	return value, nil
+	return value
 }

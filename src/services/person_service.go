@@ -7,6 +7,7 @@ import (
 
 type IPersonService interface {
 	FindOneByName(name string) (data.Person, error)
+	FindAll() ([]data.Person, error)
 }
 
 type PersonService struct {
@@ -21,4 +22,8 @@ func NewPersonService(repository repositories.IPersonRepository) IPersonService 
 
 func (s *PersonService) FindOneByName(name string) (data.Person, error) {
 	return s.repository.FindOneByName(name)
+}
+
+func (s *PersonService) FindAll() ([]data.Person, error) {
+	return s.repository.FindAll()
 }
